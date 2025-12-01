@@ -2,7 +2,14 @@ import pandas as pd
 
 # 1. Top 5 revenue days
 def top_5_revenue_days(orders):
-    daily = orders.groupby('date')['paid_price'].sum().reset_index()
+    daily = orders.dropna(subset=['date', 'paid_price'])
+    daily = daily[daily['paid_price'] >= 0]
+    
+    daily['date'] = pd.to_datetime(daily['date'])
+    # group by date
+    daily = daily.groupby('date')['paid_price'].sum().reset_index()
+
+    # top 5
     top5 = daily.sort_values('paid_price', ascending=False).head(5)
     return top5
 

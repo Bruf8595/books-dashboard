@@ -41,9 +41,14 @@ for tab, folder in zip(tabs, folders):
 
         
         st.subheader("Daily Revenue Chart")
-        daily = orders.groupby('date')['paid_price'].sum().reset_index()
+        daily = orders.dropna(subset=['date', 'paid_price'])
+        daily = daily[daily['paid_price'] >= 0]
+
+        # convert to datetime and sort
+        daily['date'] = pd.to_datetime(daily['date'])
+        daily = daily.sort_values('date')
         fig, ax = plt.subplots(figsize=(10, 4))
-        ax.plot(daily['date'], daily['paid_price'], marker='o')
+        ax.plot(daily['date'], daily['paid_price'], marker='o', linestyle='-')
         ax.set_xlabel("Date")
         ax.set_ylabel("Revenue ($)")
         ax.set_title(f"Daily Revenue - {folder}")

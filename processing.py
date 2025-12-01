@@ -83,6 +83,9 @@ def load_and_clean(path: str) -> pd.DataFrame:
 
     orders['timestamp'] = pd.to_datetime(orders['timestamp'], errors='coerce')
 
+        # remove invalid timestamps Was problem with NaT
+    orders = orders.dropna(subset=['timestamp'])
+
     orders['date'] = orders['timestamp'].dt.date
 
 
