@@ -1,7 +1,7 @@
 from processing import load_and_clean
 from analytics import run_all_analytics
 
-data_folders = ["data/DATA1", "data/DATA2", "data/DATA3"]
+data_folders = ["Data/DATA1", "Data/DATA2", "Data/DATA3"]
 
 results = {}
 for folder in data_folders:

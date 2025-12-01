@@ -8,7 +8,7 @@ st.set_page_config(page_title="Books Dashboard", layout="wide")
 
 st.title("📊 Books Sales Dashboard")
 
-folders = ["data/DATA1", "data/DATA2", "data/DATA3"]
+folders = ["Data/DATA1", "Data/DATA2", "Data/DATA3"]
 tabs = st.tabs(["DATA1", "DATA2", "DATA3"])
 
 for tab, folder in zip(tabs, folders):
